@@ -15,6 +15,16 @@ const apiKey = ref<string>('');
 
 const router = useRouter();
 
+onMounted(() => {
+  if (userApiKey.value && userApiKey.value.trim().length > 30) {
+    router.push('/chat');
+  } else {
+    chatStore.setApiKey('');
+    router.push('/');
+  }
+});
+
+
 watch(userApiKey, (newValue) => {
   if (newValue && newValue.trim().length > 30) {
     router.push('/chat');
