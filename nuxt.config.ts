@@ -10,5 +10,5 @@ export default defineNuxtConfig({
     },
   },
   modules: ['@nuxt/ui', '@pinia/nuxt', '@nuxthub/core'],
-  ssr: true,
+  ssr: false,
 })

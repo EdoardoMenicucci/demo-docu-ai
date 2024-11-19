@@ -4,6 +4,7 @@
       <QuickStart />
       <InputApiKey />
       <OtherInfo />
+      <Repositories />
     </div>
   </div>
 </template>

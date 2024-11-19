@@ -1,57 +1,26 @@
-## Configuare l'App
+# Docu-AI Demo
 
-```sh
-git clone {urlRepo}
-```
+## Descrizione
 
-## Installare Dipendenze
+Questa è una versione demo dell'applicazione Docu-AI, una piattaforma che utilizza l'intelligenza artificiale di Google Gemini per l'elaborazione e l'analisi di documenti.
 
-```sh
-npm install
-```
+## Differenze dalla versione originale
 
-## Configura variabili d'ambiente file .env
+Utilizza Nuxt.js e Cloudflare per l'hosting
+Implementa una versione semplificata del modello Gemini
+Focus sulla dimostrazione delle funzionalità core
+Interfaccia utente ottimizzata per scopi dimostrativi
 
-```sh
-GEMINI_API_KEY=la-tua-chiave-api
-```
+## Tecnologie utilizzate
 
-## Avvia l'applicazione
+Nuxt 3
+Google Gemini AI
+Tailwind CSS
+TypeScript
+Configurazione
+Note importanti
 
-```sh
-npm run dev
-```
+# Richiede una chiave API Google Gemini valida
 
-## TODO
-
-1. **Configurazione Iniziale**
-
-   - [x] Impostare l'ambiente di sviluppo
-   - [x] Configurare Tailwind CSS in `tailwind.config.js`
-   - [x] Configurare Nuxt.js in `nuxt.config.ts`
-
-2. **Caricamento PDF**
-
-   - [x] Creare un componente per il caricamento dei PDF (`UploadPdf.vue`)
-   - [x] Implementare la logica di caricamento nel backend
-
-3. **Elaborazione con AI**
-
-   - [x] Integrare un servizio di AI per l'elaborazione dei PDF
-   - [x] Implementare la logica di estrazione del contenuto importante
-
-4. **Salvare chat nel Database e storico chat per utente**
-
-   - [x] Salvare chat nel database
-   - [x] Salvare dati del file
-   - [ ] Upload del pdf su UploadThing
-   - [x] Implementare storico chat per utente
-
-5. **Evidenziazione del Contenuto**
-
-   - [ ] Creare un componente per visualizzare ed evidenziare il contenuto estratto (`HighlightContent.vue`)
-   - [ ] Implementare la logica di evidenziazione nel PDF
-
-6. **Interfaccia Utente**
-   - [ ] Progettare l'interfaccia utente per la gestione dei PDF
-   - [x] Implementare la navigazione tra le diverse sezioni dell'applicazione
+In caso di sovraccarico del servizio Gemini, attendere e riprovare
+L'applicazione è deployata su Cloudflare attraverso Nuxt Hub per garantire performance e scalabilità ottimali.

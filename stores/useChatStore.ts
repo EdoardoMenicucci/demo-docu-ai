@@ -133,18 +133,26 @@ export const useChatStore = defineStore({
             4. Se ci sono richieste dall'utente rispondi solamente alla richiesta dell utente.`,
         });
 
-        const result = await model.generateContent([
-          {
-            inlineData: {
-              mimeType: "application/pdf",
-              data: base64 as string
-            }
-          },
-          { text: this.promptUtente }
-        ]);
+        try {
+          const result = await model.generateContent([
+            {
+              inlineData: {
+                mimeType: "application/pdf",
+                data: base64 as string
+              }
+            },
+            { text: this.promptUtente }
+          ]);
 
-        const res = result.response.text();
-        this.addMessage(res, 'AI');
+
+          const res = result.response.text();
+          this.addMessage(res, 'AI');
+        } catch (error) {
+          throw createError({
+            statusCode: 500,
+            message: `Errore nella generazione del contenuto: ${error}`,
+          })
+        }
 
       } catch (error) {
         console.error('Errore durante l\'invio del messaggio:', error);
