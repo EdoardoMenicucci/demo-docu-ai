@@ -4,6 +4,10 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   app: {
     head: {
+      title: 'Il tuo titolo',
+      meta: [
+        { name: 'description', content: `Versione demo completamente gratuita di Docu-Ai con meno funzionalita'` }
+      ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }
       ]
