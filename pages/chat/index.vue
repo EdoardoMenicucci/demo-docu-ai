@@ -6,7 +6,8 @@
       <LeftAppBar :class="{ '': leftAppBarShow == true }" v-if="leftAppBarShow == true"
         @reset="chatStore.handleReset" />
 
-
+      <!-- Right section -->
+      <!-- 90vh overflow Chat Body -->
       <ChatBody />
 
 
@@ -17,8 +18,7 @@
         </div>
       </UModal>
 
-      <!-- Right section -->
-      <!-- 90vh overflow Chat Body -->
+
 
 
 
@@ -48,11 +48,6 @@ watch(userApiKey, (newValue) => {
 });
 
 const leftAppBarShow = ref<boolean>(true);
-
-const toggleLeftAppBar = () => {
-  leftAppBarShow.value = !leftAppBarShow.value;
-}
-
 
 
 </script>

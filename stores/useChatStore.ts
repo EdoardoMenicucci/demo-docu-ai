@@ -127,10 +127,9 @@ export const useChatStore = defineStore({
         const genAI = new GoogleGenerativeAI(this.userApiKey ?? '');
         const model = genAI.getGenerativeModel({
           model: "gemini-1.5-flash",
-          systemInstruction: `1. Estrai i concetti più importanti sintetizzando il contenuto del documento.
+          systemInstruction: `1. Estrai i concetti più importanti sintetizzando il contenuto del documento se non ci sono richieste dall'utente.
             2. Non inventare nulla.
-            3. Applica le classi di Tailwind CSS per aggiungere stile ed enfatizzare i contenuti più importanti (il testo deve essere bianco/chiaro) non utilizzare apertura '''html e chiusura '''.
-            4. Se ci sono richieste dall'utente rispondi solamente alla richiesta dell utente.`,
+            3. Applica le classi di Tailwind CSS per aggiungere stile ed enfatizzare i contenuti più importanti (il testo deve essere bianco/chiaro) non utilizzare apertura '''html e chiusura '''`,
         });
 
         try {
