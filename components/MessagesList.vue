@@ -12,7 +12,12 @@
         </div>
         <!-- Aggiungi fallback per debug -->
         <div v-else-if="res.text">
-          <MDC :value="res.text" tag="div" />
+          <ClientOnly>
+            <MDC :value="res.text" tag="div" />
+            <template #fallback>
+              <div class="loading">Caricamento...</div>
+            </template>
+          </ClientOnly>
           <!-- Debug output -->
           <!-- <pre class="text-xs mt-2">DEBUG OUTPUT: {{ res.text }}</pre> -->
         </div>
