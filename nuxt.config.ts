@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   app: {
     head: {
-      title: 'Il tuo titolo',
+      title: 'Demo Docu-Ai',
       meta: [
         { name: 'description', content: `Versione demo completamente gratuita di Docu-Ai con meno funzionalita'` }
       ],
