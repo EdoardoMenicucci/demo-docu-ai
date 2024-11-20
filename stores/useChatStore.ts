@@ -129,7 +129,7 @@ export const useChatStore = defineStore({
           model: "gemini-1.5-flash",
           systemInstruction: `1. Estrai i concetti più importanti sintetizzando il contenuto del documento.
             2. Non inventare nulla.
-            3. Applica le classi di Tailwind CSS per aggiungere stile ed enfatizzare i contenuti più importanti (il testo deve essere bianco/chiaro) non utilizzare apertura '''html e chiusura '''.
+            3. Rispondi in formato Markdown .md per la formattazione e enfasi del testo.
             4. Se ci sono richieste dall'utente rispondi solamente alla richiesta dell utente.`,
         });
 
@@ -147,14 +147,19 @@ export const useChatStore = defineStore({
 
           const res = result.response.text();
           this.addMessage(res, 'AI');
+          console.log('Risposta:', res);
+
         } catch (error) {
-          throw createError({
-            statusCode: 500,
-            message: `Errore nella generazione del contenuto: ${error}`,
-          })
+          let errorMessage = 'Si è verificato un errore durante la generazione della risposta.';
+          if ((error as Error).message?.includes('503') || (error as Error).message?.includes('overloaded')) {
+            errorMessage = '⚠️ Il modello è sovraccarico. Per favore riprova tra qualche minuto.';
+          }
+          this.addMessage(errorMessage, 'AI');
         }
 
       } catch (error) {
+        const errorMessage = '❌ Si è verificato un errore inaspettato. Per favore riprova.';
+        this.addMessage(errorMessage, 'AI');
         console.error('Errore durante l\'invio del messaggio:', error);
       } finally {
         this.isSendingMessages = false

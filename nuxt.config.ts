@@ -20,6 +20,11 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  modules: ['@nuxt/ui', '@pinia/nuxt', '@nuxthub/core'],
+  modules: ['@nuxt/ui', '@pinia/nuxt', '@nuxthub/core', '@nuxtjs/mdc'],
+  mdc: {
+    highlight: {
+      theme: 'github-dark'
+    }
+  },
   ssr: false,
 })
