@@ -4,7 +4,11 @@
     <div class="flex mx-5" :class="{ 'justify-end': res.user === 'USER' }">
       <div class="w-3/4 relative text-white bg-dark-gray-900 p-5 rounded-xl border-dark-gray-500 border-2 m-4 order-1"
         :class="{ 'order-2': res.user === 'AI' }">
-        <div v-html="res.text" class="">
+        <div v-if="res.user === 'AI'" v-html="res.text" class="">
+        </div>
+        <div v-else>
+          <p v-if="res.text">{{ res.text }}</p>
+          <p v-else>Nessuna richiesta specifica</p>
         </div>
         <UBadge class="absolute -top-3" :class="{ 'left-1': res.user === 'USER', 'right-1': res.user === 'AI' }">
           {{ res.date }}

@@ -3,8 +3,7 @@
     <div class="mx-auto h-screen flex flex-shrink">
 
       <!-- Left section -->
-      <LeftAppBar :class="{ '': leftAppBarShow == true }" v-if="leftAppBarShow == true"
-        @reset="chatStore.handleReset" />
+      <LeftAppBar @reset="chatStore.handleReset" />
 
       <!-- Right section -->
       <!-- 90vh overflow Chat Body -->
@@ -47,7 +46,7 @@ watch(userApiKey, (newValue) => {
   }
 });
 
-const leftAppBarShow = ref<boolean>(true);
+
 
 
 </script>

@@ -29,8 +29,6 @@ export interface ChatState {
   fileSet: boolean;
   promptUtente: string;
   messages: Message[];
-  isUploading: boolean;
-  leftAppBarShow: boolean;
   isSendingMessages: boolean
   userApiKey: string
 }
@@ -45,8 +43,6 @@ export const useChatStore = defineStore({
     fileSet: false,
     promptUtente: '',
     messages: [],
-    isUploading: false,
-    leftAppBarShow: true,
     isSendingMessages: false,
     userApiKey: typeof window !== 'undefined' ? sessionStorage.getItem('gemini_api_key') || '' : '',
   }),
@@ -100,13 +96,11 @@ export const useChatStore = defineStore({
       this.pdfUrl = '';
     },
 
-    toggleLeftAppBar() {
-      this.leftAppBarShow = !this.leftAppBarShow;
-    },
     /**
      * Invia un messaggio e riceve la risposta dell'IA
      */
     async sendMessage() {
+
       try {
         this.addMessage(this.promptUtente, 'USER');
 
@@ -140,21 +134,24 @@ export const useChatStore = defineStore({
                 data: base64 as string
               }
             },
-            { text: this.promptUtente }
+            { text: this.promptUtente ?? '' }
           ]);
 
 
           const res = result.response.text();
           this.addMessage(res, 'AI');
         } catch (error) {
-          throw createError({
-            statusCode: 500,
-            message: `Errore nella generazione del contenuto: ${error}`,
-          })
+
+          if ((error instanceof Error) && error.message.includes('503')) {
+            console.error('[503 ] The model is overloaded. Please try again later.:', error.message);
+          }
+
+          this.addMessage(`⚠️Il modello e' sovraccaricato, Riprova piu' tardi⚠️`, 'AI');
         }
 
       } catch (error) {
         console.error('Errore durante l\'invio del messaggio:', error);
+        this.addMessage(`⚠️Errore durante l'invio del messaggio⚠️`, 'AI');
       } finally {
         this.isSendingMessages = false
       }
