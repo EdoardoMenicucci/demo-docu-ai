@@ -142,14 +142,23 @@ export const useChatStore = defineStore({
           this.addMessage(res, 'AI');
         } catch (error) {
 
+          // Se il modello è sovraccaricato
           if ((error instanceof Error) && error.message.includes('503')) {
             console.error('[503 ] The model is overloaded. Please try again later.:', error.message);
+            this.addMessage(`⚠️Il modello e' sovraccaricato, Riprova piu' tardi⚠️`, 'AI');
           }
 
-          this.addMessage(`⚠️Il modello e' sovraccaricato, Riprova piu' tardi⚠️`, 'AI');
+          // Se la chiavi API non è valida
+          if ((error instanceof Error) && (error.message.includes('400') || error.message.includes('401'))) {
+            console.error('[401 ] Unauthorized. Please check your API key:', error.message);
+            this.addMessage(`⚠️Non autorizzato. Controlla la tua chiave API e premi Back per reimpostarla⚠️`, 'AI');
+          }
+
+
         }
 
       } catch (error) {
+        // Errore generico
         console.error('Errore durante l\'invio del messaggio:', error);
         this.addMessage(`⚠️Errore durante l'invio del messaggio⚠️`, 'AI');
       } finally {
